@@ -1,0 +1,33 @@
+
+---
+
+## 🧠 Highlights of This Repository
+
+✅ Covers DSA, Core Java, OOP, and coding challenges  
+✅ Organized by problem type and topic  
+✅ Ideal for coding interviews and revision  
+✅ Designed for long-term learning & improvement
+
+---
+
+## 📊 Repository Stats (Auto-Update Ready)
+
+These blocks are designed for workflow automation:
+
+### ✅ Total Problems Solved
+`<!--PROBLEM_COUNT-->`  
+*(This will dynamically update with the number of files in your DSA & LeetCode folders.)*
+
+### ✅ GitHub Contribution Stats
+`<!--STATS_SECTION-->`  
+*(A GitHub Action can auto-insert latest stats or streak images here.)*
+
+---
+
+## 🔥 Sample Badges (Optional)
+
+You can later enable these dynamically:
+```md
+![Java](https://img.shields.io/badge/Java-Practice-orange?logo=java)
+![Repo Size](https://img.shields.io/github/repo-size/abhijitpavse/java-practice)
+![Last Commit](https://img.shields.io/github/last-commit/abhijitpavse/java-practice)
