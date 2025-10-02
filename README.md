@@ -45,10 +45,14 @@ java dsa.Example
 
 ### ✅ Total Problems Solved
 <!--PROBLEM_COUNT-->
+**DSA:** 0  
+**LeetCode:** 1  
+**Java:** 9  
 <!--PROBLEM_COUNT_END-->
 
 ### ✅ GitHub Contribution Stats
 <!--STATS_SECTION-->
+**Last updated:** 2025-10-02 05:04 UTC
 <!--STATS_SECTION_END-->
 
 ---
