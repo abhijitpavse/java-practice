@@ -6,3 +6,9 @@ Welcome to **Java Practice** — a structured collection of Java programs, DSA p
 
 ## 📂 Project Structure
 
+---
+java-practice/
+├── dsa/ # Algorithms & Data Structures
+├── java codes/ # Core Java concepts & practice
+└── leetcodeque/ # LeetCode-style problem solutions
+---
