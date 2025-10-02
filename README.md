@@ -24,4 +24,12 @@ cd java-practice
 javac dsa/Example.java
 java dsa.Example
 ```
+
+
+### ✅ With this ✔ (no code block, no ```md)
+```md
+![Java](https://img.shields.io/badge/Java-Practice-orange?logo=java)
+![Repo Size](https://img.shields.io/github/repo-size/abhijitpavse/java-practice)
+![Last Commit](https://img.shields.io/github/last-commit/abhijitpavse/java-practice)
+
 ---
