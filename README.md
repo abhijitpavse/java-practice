@@ -24,12 +24,32 @@ cd java-practice
 javac dsa/Example.java
 java dsa.Example
 ```
+# 🚀 Java Practice Repository
 
-
-### ✅ With this ✔ (no code block, no ```md)
-```md
 ![Java](https://img.shields.io/badge/Java-Practice-orange?logo=java)
 ![Repo Size](https://img.shields.io/github/repo-size/abhijitpavse/java-practice)
 ![Last Commit](https://img.shields.io/github/last-commit/abhijitpavse/java-practice)
 
 ---
+
+## 🧠 Highlights of This Repository
+
+✅ Covers DSA, Core Java, OOP, and coding challenges  
+✅ Organized by problem type and topic  
+✅ Ideal for coding interviews and revision  
+✅ Designed for long-term learning & improvement
+
+---
+
+## 📊 Repository Stats (Auto-Update Ready)
+
+### ✅ Total Problems Solved
+<!--PROBLEM_COUNT-->
+<!--PROBLEM_COUNT_END-->
+
+### ✅ GitHub Contribution Stats
+<!--STATS_SECTION-->
+<!--STATS_SECTION_END-->
+
+---
+
