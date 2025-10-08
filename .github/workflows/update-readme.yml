@@ -4,8 +4,8 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: "*/30 * * * *"   # runs every 30 minutes (you can change this)
-  workflow_dispatch: {}       # manual trigger option
+    - cron: "*/30 * * * *"   # Runs every 30 minutes
+  workflow_dispatch: {}       # Allow manual trigger from Actions tab
 
 permissions:
   contents: write
@@ -25,21 +25,22 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Update README Automatically
+      - name: Update README Automatically (IST Time)
         run: |
           python3 - <<'PY'
           import re, pathlib, sys
-          from datetime import datetime, timezone
+          from datetime import datetime, timedelta, timezone
 
           repo = pathlib.Path(".")
 
-          # Folders to check
+          # Folders to track
           folders = {
               "DSA": "dsa",
               "LeetCode": "leetcodeque",
               "Java Codes": "java codes"
           }
 
+          # Count .java files
           counts = {}
           for label, folder in folders.items():
               path = repo / folder
@@ -48,25 +49,25 @@ jobs:
                   count = sum(1 for f in path.rglob("*.java") if f.is_file())
               counts[label] = count
 
-          # Build replacement text
+          # Prepare the problem count text
           count_lines = [f"**{label}:** {count}" for label, count in counts.items()]
           count_text = "\n".join(count_lines)
-
-          # Add total
           total = sum(counts.values())
           count_text += f"\n\n**Total Problems:** {total}"
 
-          # Timestamp (auto refresh)
-          utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+          # Convert UTC → IST (UTC +5:30)
+          ist_offset = timedelta(hours=5, minutes=30)
+          ist_time = datetime.now(timezone.utc) + ist_offset
+          time_str = ist_time.strftime("%Y-%m-%d %I:%M:%S %p IST")
 
           readme = repo / "README.md"
           if not readme.exists():
-              print("README.md not found")
+              print("❌ README.md not found")
               sys.exit(1)
 
           text = readme.read_text(encoding="utf-8")
 
-          # Replace PROBLEM_COUNT section
+          # Replace PROBLEM_COUNT block
           text = re.sub(
               r"<!--PROBLEM_COUNT-->.*?<!--PROBLEM_COUNT_END-->",
               f"<!--PROBLEM_COUNT-->\n{count_text}\n<!--PROBLEM_COUNT_END-->",
@@ -74,16 +75,16 @@ jobs:
               flags=re.S
           )
 
-          # Replace STATS_SECTION section
+          # Replace STATS_SECTION block
           text = re.sub(
               r"<!--STATS_SECTION-->.*?<!--STATS_SECTION_END-->",
-              f"<!--STATS_SECTION-->\nLast updated: **{utc_time}**\n<!--STATS_SECTION_END-->",
+              f"<!--STATS_SECTION-->\nLast updated: **{time_str}**\n<!--STATS_SECTION_END-->",
               text,
               flags=re.S
           )
 
           readme.write_text(text, encoding="utf-8")
-          print("✅ README.md updated successfully!")
+          print(f"✅ README.md updated successfully at {time_str}")
           PY
 
       - name: Commit & Push Changes
@@ -91,6 +92,6 @@ jobs:
         with:
           author_name: github-actions[bot]
           author_email: 41898282+github-actions[bot]@users.noreply.github.com
-          message: "chore: auto-update README (problems & timestamp)"
+          message: "chore: auto-update README (problem count & IST time)"
           add: "README.md"
           push: true
