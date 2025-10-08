@@ -22,14 +22,16 @@ Welcome to **Java Practice** — a structured collection of Java programs, DSA p
 
 ### ✅ Total Problems Solved
 <!--PROBLEM_COUNT-->
-**DSA:** 0  
-**LeetCode:** 1  
-**Java:** 9  
+**DSA:** 0
+**LeetCode:** 1
+**Java Codes:** 9
+
+**Total Problems:** 10
 <!--PROBLEM_COUNT_END-->
 
 ### ✅ GitHub Contribution Stats
 <!--STATS_SECTION-->
-**Last updated:** 2025-10-08 05:58 UTC
+Last updated: **2025-10-08 06:14:58 UTC**
 <!--STATS_SECTION_END-->
 
 ---
