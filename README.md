@@ -14,45 +14,42 @@ Welcome to **Java Practice** — a structured collection of Java programs, DSA p
 ✅ Covers DSA, Core Java, OOP, and coding challenges  
 ✅ Organized by problem type and topic  
 ✅ Ideal for coding interviews and revision  
-✅ Designed for long-term learning & improvement
+✅ Designed for long-term learning & improvement  
 
 ---
 
-## 📊 Repository Stats (Auto-Update Ready)
+## 📊 Repository Stats (Auto-Updated)
 
-### ✅ Total Problems Solved
+### ✅ Total Problems Solved  
 <!--PROBLEM_COUNT-->
-**DSA:** 0
-**LeetCode:** 1
-**Java Codes:** 9
-
-**Total Problems:** 10
+Counting files...
 <!--PROBLEM_COUNT_END-->
 
-### ✅ GitHub Contribution Stats
+### ✅ GitHub Contribution Stats  
 <!--STATS_SECTION-->
-Last updated: **2025-10-08 06:14:58 UTC**
+Last updated: _initializing..._
 <!--STATS_SECTION_END-->
 
 ---
 
-## 📂 Project Structure
+## 🔥 How It Works  
 
-```
-java-practice/
-├── dsa/ # Algorithms & Data Structures
-├── java codes/ # Core Java concepts & practice
-└── leetcodeque/ # LeetCode-style problem solutions
-```
+This README automatically updates every time:
+- You push new `.java` files  
+- Or daily at midnight (via GitHub Actions schedule)
+
+It counts files inside:
+- `/dsa`
+- `/leetcodeque`
+- `/java codes`
+
+and refreshes the live timestamp.
+
 ---
-🚀 How to Run Code Locally
 
-```
-# Clone
-git clone https://github.com/abhijitpavse/java-practice.git
-cd java-practice
+## 📬 Author  
 
-# Compile & Run (Example)
-javac dsa/Example.java
-java dsa.Example
-```
+**Abhijit Pavse**  
+🔗 [GitHub Profile](https://github.com/abhijitpavse)
+
+---
