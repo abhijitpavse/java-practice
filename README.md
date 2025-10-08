@@ -22,12 +22,16 @@ Welcome to **Java Practice** — a structured collection of Java programs, DSA p
 
 ### ✅ Total Problems Solved  
 <!--PROBLEM_COUNT-->
-Counting files...
+**DSA:** 0
+**LeetCode:** 1
+**Java Codes:** 9
+
+**Total Problems:** 10
 <!--PROBLEM_COUNT_END-->
 
 ### ✅ GitHub Contribution Stats  
 <!--STATS_SECTION-->
-Last updated: _initializing..._
+Last updated: **2025-10-08 06:16:01 UTC**
 <!--STATS_SECTION_END-->
 
 ---
