@@ -1,12 +1,11 @@
-name: Update README Stats
+name: Auto Update README
 
-# Allow manual runs, schedule, and runs on push to main
 on:
-  workflow_dispatch: {}
   push:
-    branches: ['main']
+    branches: ["main"]
   schedule:
-    - cron: '0 0 * * *' # daily at UTC midnight (optional)
+    - cron: "*/30 * * * *"   # runs every 30 minutes (you can change this)
+  workflow_dispatch: {}       # manual trigger option
 
 permissions:
   contents: write
@@ -14,82 +13,84 @@ permissions:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Set Up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
-      - name: Update README (count problems & insert stats)
+      - name: Update README Automatically
         run: |
           python3 - <<'PY'
           import re, pathlib, sys
-          repo = pathlib.Path('.')
+          from datetime import datetime, timezone
 
-          # DIRECTORIES TO COUNT (edit if your folders differ)
+          repo = pathlib.Path(".")
+
+          # Folders to check
           folders = {
-              'DSA': 'dsa',
-              'LeetCode': 'leetcodeque',
-              'Java': 'java codes'
+              "DSA": "dsa",
+              "LeetCode": "leetcodeque",
+              "Java Codes": "java codes"
           }
 
           counts = {}
-          for label, d in folders.items():
-              p = repo / d
-              n = 0
-              if p.exists():
-                  # count .java files (change pattern if you want to count other files)
-                  for f in p.rglob('*.java'):
-                      if f.is_file():
-                          n += 1
-              counts[label] = n
+          for label, folder in folders.items():
+              path = repo / folder
+              count = 0
+              if path.exists():
+                  count = sum(1 for f in path.rglob("*.java") if f.is_file())
+              counts[label] = count
 
-          # Build replacement text for PROBLEM_COUNT block
-          rep_lines = []
-          for label in folders:
-              rep_lines.append(f"**{label}:** {counts[label]}  ")
-          replacement = "\n".join(rep_lines)
+          # Build replacement text
+          count_lines = [f"**{label}:** {count}" for label, count in counts.items()]
+          count_text = "\n".join(count_lines)
 
-          readme = repo / 'README.md'
+          # Add total
+          total = sum(counts.values())
+          count_text += f"\n\n**Total Problems:** {total}"
+
+          # Timestamp (auto refresh)
+          utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+          readme = repo / "README.md"
           if not readme.exists():
-              print('README.md not found', file=sys.stderr)
+              print("README.md not found")
               sys.exit(1)
 
-          txt = readme.read_text(encoding='utf-8')
+          text = readme.read_text(encoding="utf-8")
 
-          # Replace PROBLEM_COUNT block between markers
-          txt_new = re.sub(
-              r'<!--PROBLEM_COUNT-->.*?<!--PROBLEM_COUNT_END-->',
-              '<!--PROBLEM_COUNT-->\n' + replacement + '\n<!--PROBLEM_COUNT_END-->',
-              txt, flags=re.S
+          # Replace PROBLEM_COUNT section
+          text = re.sub(
+              r"<!--PROBLEM_COUNT-->.*?<!--PROBLEM_COUNT_END-->",
+              f"<!--PROBLEM_COUNT-->\n{count_text}\n<!--PROBLEM_COUNT_END-->",
+              text,
+              flags=re.S
           )
 
-          # You can also update STATS_SECTION (example: timestamp)
-          from datetime import datetime
-          stats_text = f"**Last updated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}"
-          txt_new = re.sub(
-              r'<!--STATS_SECTION-->.*?<!--STATS_SECTION_END-->',
-              '<!--STATS_SECTION-->\n' + stats_text + '\n<!--STATS_SECTION_END-->',
-              txt_new, flags=re.S
+          # Replace STATS_SECTION section
+          text = re.sub(
+              r"<!--STATS_SECTION-->.*?<!--STATS_SECTION_END-->",
+              f"<!--STATS_SECTION-->\nLast updated: **{utc_time}**\n<!--STATS_SECTION_END-->",
+              text,
+              flags=re.S
           )
 
-          if txt_new != txt:
-              readme.write_text(txt_new, encoding='utf-8')
-              print('README updated')
-          else:
-              print('No changes needed')
+          readme.write_text(text, encoding="utf-8")
+          print("✅ README.md updated successfully!")
           PY
 
-      - name: Commit & push README changes
+      - name: Commit & Push Changes
         uses: EndBug/add-and-commit@v9
         with:
           author_name: github-actions[bot]
           author_email: 41898282+github-actions[bot]@users.noreply.github.com
-          message: 'chore: update README stats'
-          add: 'README.md'
+          message: "chore: auto-update README (problems & timestamp)"
+          add: "README.md"
           push: true
